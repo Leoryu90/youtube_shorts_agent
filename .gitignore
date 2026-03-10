@@ -1,0 +1,24 @@
+.env
+.env.local
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+build/
+
+# 파이프라인 생성 데이터 (용량 큰 파일들)
+video_pipeline/data/raw/*
+video_pipeline/data/audio/*
+video_pipeline/data/output/*
+video_pipeline/data/transcripts/*
+!video_pipeline/data/**/.gitkeep
+
+# Whisper 모델 캐시 (수백 MB ~ 수 GB)
+video_pipeline/models/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/

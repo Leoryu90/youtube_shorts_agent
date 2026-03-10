@@ -1,0 +1,49 @@
+# 파이프라인 전체 설정
+
+pipeline:
+  language: ko          # STT/요약 언어
+  target_duration: 55   # 쇼츠 목표 길이 (초, 최대 60)
+
+stt:
+  model_size: base      # tiny | base | small | medium | large
+  device: cpu           # cpu | cuda (CUDA 12.x 설치 후 cuda로 변경)
+  compute_type: int8    # int8 (cpu) | float16 (cuda)
+
+summarize:
+  mode: local           # local | gpt
+  max_chars: 180        # 한국어 기준 55초 ≈ 180자
+  ollama_model: llama3  # mode=local 시 사용할 Ollama 모델
+
+tts:
+  engine: edge-tts      # edge-tts | elevenlabs
+  voice: ko-KR-SunHiNeural   # edge-tts 한국어 음성
+  rate: "+0%"           # 속도 조절 (-50% ~ +100%)
+  volume: "+0%"
+
+video:
+  resolution: [1080, 1920]         # 9:16 쇼츠
+  fps: 30
+  background_color: "black"
+  font_path: "C:/Windows/Fonts/malgun.ttf"  # 한글 폰트
+  font_size: 48
+  font_color: "white"
+  font_border_color: "black"
+  font_border_width: 2
+
+image:
+  engine: auto            # auto | sd | gradient
+                          # auto: SD 시도 → 실패 시 그라디언트 자동 전환
+  # Stable Diffusion 설정 (engine=sd 또는 auto일 때)
+  model_id: runwayml/stable-diffusion-v1-5
+  steps: 20
+  img_width: 576          # 9:16 비율 (576x1024)
+  img_height: 1024
+  style_suffix: "cinematic, dramatic lighting, high quality, photorealistic, vertical"
+  negative_prompt: "text, watermark, logo, blurry, low quality, ugly"
+  ollama_model: llama3    # 프롬프트 번역용 (없으면 기본 프롬프트 사용)
+
+paths:
+  raw: data/raw
+  transcripts: data/transcripts
+  audio: data/audio
+  output: data/output

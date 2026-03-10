@@ -1,0 +1,26 @@
+# 다운로드
+yt-dlp
+
+# STT
+faster-whisper
+
+# 요약 (로컬 LLM)
+ollama  # Ollama 서버 별도 설치 필요: https://ollama.com
+
+# TTS
+edge-tts
+
+# 이미지 생성
+Pillow  # PIL 그라디언트 폴백 (항상 필요)
+
+# 설정
+pyyaml
+
+# ── Stable Diffusion (선택, 이미지 품질 업그레이드 시) ──────────────────────
+# CUDA 12.x 환경에서 설치:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+#   pip install diffusers transformers accelerate
+
+# ── Phase 2 (유료 API, 필요 시 주석 해제) ────────────────────────────────────
+# openai
+# elevenlabs
