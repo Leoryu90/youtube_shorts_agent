@@ -2,6 +2,37 @@
 stt.py — 오디오 → 텍스트 변환 (faster-whisper, 로컬 CUDA)
 """
 
+import os
+import sys
+from pathlib import Path
+
+
+def _register_cuda_dlls():
+    """pip으로 설치된 nvidia-cublas-cu12 등의 DLL 경로를 Windows PATH에 추가
+
+    ctranslate2 C 확장은 Python add_dll_directory가 아닌 PATH를 직접 읽으므로
+    os.environ["PATH"]에도 추가해야 합니다.
+    """
+    if sys.platform != "win32":
+        return
+    venv_root = Path(sys.executable).parent.parent
+    nvidia_base = venv_root / "Lib" / "site-packages" / "nvidia"
+    if not nvidia_base.exists():
+        return
+    extra = []
+    for pkg_bin in nvidia_base.glob("*/bin"):
+        if pkg_bin.is_dir():
+            extra.append(str(pkg_bin))
+            try:
+                os.add_dll_directory(str(pkg_bin))
+            except Exception:
+                pass
+    if extra:
+        os.environ["PATH"] = os.pathsep.join(extra) + os.pathsep + os.environ.get("PATH", "")
+
+
+_register_cuda_dlls()
+
 from faster_whisper import WhisperModel
 
 _model_cache: dict = {}

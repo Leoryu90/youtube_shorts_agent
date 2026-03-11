@@ -5,9 +5,9 @@ pipeline:
   target_duration: 55   # 쇼츠 목표 길이 (초, 최대 60)
 
 stt:
-  model_size: base      # tiny | base | small | medium | large
-  device: cpu           # cpu | cuda (CUDA 12.x 설치 후 cuda로 변경)
-  compute_type: int8    # int8 (cpu) | float16 (cuda)
+  model_size: large-v3      # tiny | base | small | medium | large
+  device: cuda           # cpu | cuda (CUDA 12.x 설치 후 cuda로 변경)
+  compute_type: float16    # int8 (cpu) | float16 (cuda)
 
 summarize:
   mode: local           # local | gpt
@@ -31,16 +31,16 @@ video:
   font_border_width: 2
 
 image:
-  engine: auto            # auto | sd | gradient
-                          # auto: SD 시도 → 실패 시 그라디언트 자동 전환
+  engine: picsum          # picsum(테스트용 랜덤 사진) | pollinations | auto | sd | gradient
+  pollinations_model: flux
+  img_width: 576          # 9:16 비율 (576x1024)
+  img_height: 1024
+  style_suffix: "cinematic dramatic lighting, high quality, photorealistic, vertical portrait"
+  ollama_model: llama3    # Ollama 있으면 한→영 프롬프트 번역, 없으면 기본값 사용
   # Stable Diffusion 설정 (engine=sd 또는 auto일 때)
   model_id: runwayml/stable-diffusion-v1-5
   steps: 20
-  img_width: 576          # 9:16 비율 (576x1024)
-  img_height: 1024
-  style_suffix: "cinematic, dramatic lighting, high quality, photorealistic, vertical"
   negative_prompt: "text, watermark, logo, blurry, low quality, ugly"
-  ollama_model: llama3    # 프롬프트 번역용 (없으면 기본 프롬프트 사용)
 
 paths:
   raw: data/raw

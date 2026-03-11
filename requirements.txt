@@ -11,7 +11,8 @@ ollama  # Ollama 서버 별도 설치 필요: https://ollama.com
 edge-tts
 
 # 이미지 생성
-Pillow  # PIL 그라디언트 폴백 (항상 필요)
+Pillow       # PIL 그라디언트 폴백 (항상 필요)
+requests     # Pollinations.ai API 호출
 
 # 설정
 pyyaml
