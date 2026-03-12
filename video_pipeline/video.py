@@ -226,7 +226,7 @@ def _build_subtitle_filters_timed(segments: list, config: dict) -> list:
                 f":borderw={border_width}"
                 f":x=(w-text_w)/2"
                 f":y={y}"
-                f":enable='between(t,{start:.3f},{end:.3f})'"
+                f":enable='between(t\\,{start:.3f}\\,{end:.3f})'"
             )
 
     return filters

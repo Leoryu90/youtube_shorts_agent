@@ -11,8 +11,8 @@ stt:
 
 summarize:
   mode: local           # local | gpt
-  max_chars: 180        # 한국어 기준 55초 ≈ 180자
-  ollama_model: llama3  # mode=local 시 사용할 Ollama 모델
+  max_chars: 300        # 한국어 기준 55초 ≈ 180자, 여유있게 300자
+  ollama_model: llama3  # mode=local 시 사용할 Ollama 모델 llama3 or llama3.2:3b
 
 tts:
   engine: edge-tts      # edge-tts | elevenlabs
